@@ -9,7 +9,7 @@ class LeftSidebar extends React.Component {
 
   // Fetch user queue from server?
   componentDidMount() {
-    // get users service here
+    
   }
 
 

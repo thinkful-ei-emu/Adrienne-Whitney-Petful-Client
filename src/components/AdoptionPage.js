@@ -34,17 +34,19 @@ class AdoptionPage extends React.Component {
     adoptedPets: []
   }
 
-  // when the component mounts, get the dog and cat queues from server
-  // componentDidMount() {
-  //   // get dog queue
-  //   const dogs = petServices.getPet('dog');
-  //   const cats = petServices.getPet('cat');
+  //when the component mounts, get the dog and cat queues from server
+  componentDidMount() {
+    // get dog queue
+    // const dogs = petServices.getPet('dog');
+    // const cats = petServices.getPet('cat');
 
-  //   this.setState({
-  //     dogs: dogs,
-  //     cats: cats,
-  //   })
-  // }
+    // this.setState({
+    //   dogs: dogs,
+    //   cats: cats,
+    // })
+
+    this.props.startTimer();
+  }
 
   // when user clicks adopt, take pet out of state and tell server to delete
   handleAdopt = (pet) => {
