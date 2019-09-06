@@ -1,0 +1,40 @@
+.LandingPage-container {
+  background-color: white;
+  padding-bottom: 15px;
+}
+
+.LandingPage-container h2 {
+  font-size: 30px;
+}
+
+.LandingPage-container section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LandingPage-container button {
+  background-color: gray;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 8px 0px rgba(179, 179, 179, 1);
+  font-size: 18px;
+}
+
+.LandingPage-container button:hover {
+  background-color: lightcoral;
+}
+
+.LandingPage-container img {
+  width: 200px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (min-width: 600px) {
+  .LandingPage-container {
+    min-width: 60%;
+  }
+}

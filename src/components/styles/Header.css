@@ -1,0 +1,15 @@
+.Header-container {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 125px;
+  border-bottom: 1px solid lightgray;
+}
+
+.Header-container h1 {
+  font-size: 70px;
+  font-family: 'Fredericka the Great', cursive;
+  margin-top: 20px;
+}

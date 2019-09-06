@@ -1,0 +1,13 @@
+.Footer-container {
+  background-color: lightgray;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.Footer-container p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 12px;
+}

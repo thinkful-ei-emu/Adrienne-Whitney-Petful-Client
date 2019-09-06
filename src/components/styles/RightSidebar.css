@@ -1,0 +1,17 @@
+.RightSidebar-container {
+  background-color: lightgray;
+  margin-bottom: 15px;
+  
+}
+
+.RightSidebar-container h2 {
+  font-size: 20px;
+  font-family: 'Fredericka the Great', cursive;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (min-width: 600px) {
+  .RightSidebar-container {
+    width: 20%;
+  }
+}

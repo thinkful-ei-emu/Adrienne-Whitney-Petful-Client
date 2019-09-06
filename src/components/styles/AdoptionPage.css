@@ -1,0 +1,46 @@
+.AdoptionPage-container {
+  background-color: lightgreen;
+  padding-bottom: 15px;
+}
+
+.AdoptionPage-container h2 {
+  font-size: 30px;
+}
+
+.AdoptionPage-container section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.AdoptionPage-container button {
+  background-color: gray;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 8px 0px rgba(179, 179, 179, 1);
+  font-size: 18px;
+}
+
+.AdoptionPage-container button:hover {
+  background-color: lightcoral;
+}
+
+.AdoptionPage-container img {
+  width: 200px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.AdoptionPage-image-list-container {
+  display: flex;
+  flex-direction: row;
+  
+}
+
+/* MEDIA QUERIES */
+@media only screen and (min-width: 600px) {
+  .AdoptionPage-container {
+    min-width: 60%;
+  }
+}
