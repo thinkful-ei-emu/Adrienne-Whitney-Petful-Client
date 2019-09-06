@@ -1,77 +1,64 @@
 import React from 'react';
-//import petService from '../services/pet-services';
+// import catServices from '../services/cat-services';
+import petServices from '../services/pet-services';
 import './styles/AdoptionPage.css';
+import config from '../config';
 
 class AdoptionPage extends React.Component {
   state = {
-    dogs: [{
-      imageURL:'https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg', 
-      imageDescription: 'Orange bengal cat with black stripes lounging on concrete.',
-      name: 'Fluffy',
-      sex: 'Female',
-      age: 2,
-      breed: 'Bengal',
-      story: 'Thrown on the street'
-    }],
-    cats: [{
-      imageURL:'https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg', 
-      imageDescription: 'Orange bengal cat with black stripes lounging on concrete.',
-      name: 'Fluffy',
-      sex: 'Female',
-      age: 2,
-      breed: 'Bengal',
-      story: 'Thrown on the street'
-    },
-    {
-      imageURL:'https://assets3.thrillist.com/v1/image/2622128/size/tmg-slideshow_l.jpg', 
-      imageDescription: 'TEST',
-      name: 'NEW NAME TESTING',
-      sex: 'TEST',
-      age: 100,
-      breed: 'TEST',
-      story: 'TEST'
-    }],
+    dog: null,
+    cat: null,
     adoptedPets: []
   }
-
   // when the component mounts, get the dog and cat queues from server
-  // componentDidMount() {
-  //   // get dog queue
-  //   const dogs = petServices.getPet('dog');
-  //   const cats = petServices.getPet('cat');
-
-  //   this.setState({
-  //     dogs: dogs,
-  //     cats: cats,
-  //   })
-  // }
+  componentDidMount() {
+   petServices.getPet('dog')
+    .then((dog) => {
+      this.setState({dog})
+    })
+    petServices.getPet('cat')
+      .then((cat) => {
+        this.setState({cat})
+      });
+  }
 
   // when user clicks adopt, take pet out of state and tell server to delete
   handleAdopt = (pet) => {
     // Determines if the adopted pet is a cat or dog
     // If it is a cat, removes from state
     if (pet === 'cat') {
-      let adoptedCat = this.state.cats[0];
-      let availableCats = this.state.cats.filter(cat => cat.name !== adoptedCat.name);
+      let adoptedCat = this.state.cat;
+      // let availableCats = this.state.cat.filter(cat => cat.name !== adoptedCat.name);
 
-      this.setState({
-        cats: availableCats,
-        adoptedPets: [...this.state.adoptedPets, adoptedCat]
-      })
+      // this.setState({
+      //   cats: availableCats,
+      //   adoptedPets: [...this.state.adoptedPets, adoptedCat]
+      // })
 
     // Tell the server to delete the pet from queue
-    // petService.deletePet(pet)
+    // petServices.deletePet(pet)
     } else {
-      let adoptedDog = this.state.dogs[0];
-      let availableDogs = this.state.dogs.filter(dog => dog.name !== adoptedDog.name);
+      let adoptedDog = this.state.dog.name;
+      console.log(this.state.dog.name);
+      // let availableDogs = this.state.dogs.filter(dog => dog.name !== adoptedDog.name);
 
+      // this.setState({
+      //   dogs: availableDogs,
+      //   adoptedPets: [...this.state.adoptedPets, adoptedDog]
+      // })
+      // this is updating the state correctly but need to get it to render in the right hand thing
       this.setState({
-        dogs: availableDogs,
-        adoptedPets: [...this.state.adoptedPets, adoptedDog]
-      })
+        adoptedPets: this.state.adoptedPets.push(adoptedDog)
+      });
+      console.log(this.state.adoptedPets);
 
+      petServices.deletePet(adoptedDog)
+        .then((dog) => {
+          
+        })
       // Tell the server to delete the pet from queue
-    // petService.deletePet(pet)
+      // hmmm how to fix this, don't want to have to do two handle adoption functions
+    // petServices.deletePet(pet)
     }
     
   }
@@ -87,8 +74,8 @@ class AdoptionPage extends React.Component {
   }
 
   render() {
-    const cat = this.state.cats[0];
-    const dog = this.state.dogs[0];
+    const cat = this.state.cat;
+    const dog = this.state.dog;
     return(
       <main>
       {/* Should only come on when "YOU" is first in queue */}
@@ -135,7 +122,7 @@ class AdoptionPage extends React.Component {
             <button value='dog' onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
             <button onClick={this.handleCancel}>Nevermind</button>
           </section> 
-          : ''}
+         : ''}
         </section>
         
       </div>

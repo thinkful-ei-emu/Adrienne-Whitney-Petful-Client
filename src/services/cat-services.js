@@ -1,8 +1,8 @@
 import config from '../config';
 
-const petServices = {
-  getPet(petType) {
-    return fetch(`${config.API_ENDPOINT}/${petType}`, {
+const catServices = {
+  getPet() {
+    return fetch(`${config.API_ENDPOINT}/cat`, {
       method: "GET"
     }).then(res => {
       return !res.ok ? res.json().then(e => Promise.reject(e)) : res.json();
@@ -10,7 +10,7 @@ const petServices = {
   },
 
   deletePet(pet) {
-    return fetch(`${config.API_ENDPOINT}/${pet}`, {
+    return fetch(`${config.API_ENDPOINT}`, {
       method: "DELETE",
       body: JSON.stringify({
         // this will need to be changed probably
@@ -24,4 +24,4 @@ const petServices = {
   }
 }
 
-export default petServices;
+export default catServices;

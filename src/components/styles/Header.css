@@ -13,3 +13,8 @@
   font-family: 'Fredericka the Great', cursive;
   margin-top: 20px;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}

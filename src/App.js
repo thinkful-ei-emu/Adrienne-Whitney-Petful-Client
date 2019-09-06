@@ -8,21 +8,23 @@ import RightSidebar from './components/RightSidebar';
 import Footer from './components/Footer';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-    
-    <Header />
-    <main className="main-container">
-      <LeftSidebar />
-      <Route exact path='/' component={LandingPage} />
-      <Route path='/adopt' component={AdoptionPage} />
-      <RightSidebar />
-    </main>
-    <Footer />
+class App extends React.Component {
+  render() {
+    return (
+      <div className="App">
       
-    </div>
-  );
+      <Header />
+      <main className="main-container">
+        <LeftSidebar />
+        <Route exact path='/' component={LandingPage} />
+        <Route path='/adopt' component={AdoptionPage} />
+        <RightSidebar />
+      </main>
+      <Footer />
+        
+      </div>
+    );
+  }
 }
 
 export default App;
