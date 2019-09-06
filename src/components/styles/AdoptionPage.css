@@ -1,5 +1,5 @@
 .AdoptionPage-container {
-  background-color: lightgreen;
+  background-color: white;
   padding-bottom: 15px;
 }
 
@@ -20,6 +20,7 @@
   border-radius: 10px;
   box-shadow: 3px 3px 8px 0px rgba(179, 179, 179, 1);
   font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .AdoptionPage-container button:hover {
@@ -32,10 +33,20 @@
   margin-bottom: 20px;
 }
 
-.AdoptionPage-image-list-container {
+.AdoptionPage-image-list-container, .AdoptionPage-container {
   display: flex;
   flex-direction: row;
-  
+}
+
+.AdoptionPage-container {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.AdoptionPage-pet-info {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 20px;
 }
 
 /* MEDIA QUERIES */
