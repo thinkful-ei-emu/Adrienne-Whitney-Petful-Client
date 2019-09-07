@@ -27,6 +27,10 @@
   background-color: lightcoral;
 }
 
+.AdoptionPage-container button:disabled {
+  background-color: lightgray;
+}
+
 .AdoptionPage-container img {
   width: 200px;
   border-radius: 10px;
