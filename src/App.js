@@ -50,6 +50,7 @@ class App extends React.Component {
     })
   }
 
+  // NEED TO FIND A PLACE FOR THIS - WHEN LANDING PAGES MOUNTS?
   // clearTimer = (timer) => {
   //   clearInterval(timer);
   //   this.setState({
