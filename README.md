@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# PETFUL
 
-## Available Scripts
+## Summary
+Petful is an app that utilizes the Queue data structure to create a FIFO (First In First Out) system for adopting pets.  Once a user clicks `Adopt Now`, they will be added to the queue, which can be monitored in real time on the right sidebar.  Pets that have already been adopted appear on the left sidebar.  The user may view the cat and dog currently up for adoption, but may not start adopting until it is their turn.  On their turn, the `Adopt` buttons will become enabled and allows the user to adopt as many pets as they wish in 15 seconds, as long as they adopt the current available pets.  Users also have the option of clicking `Nevermind` to return to the home page.  If no cats or no dogs, or no pets are available for adoption, a message will display and users can click the button to navigate back to the home page.
 
-In the project directory, you can run:
+Live Link: [Petful App]()
 
-### `npm start`
+## API Documentation
+`/api/cats`
+* GET -> Gets current cat at the front of the queue
+* DELETE -> Deletes current cat at the front of the queue
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`/api/dogs`
+* GET -> Gets current dog at the front of the queue
+* DELETE -> Deletes current dog at the end of the queue
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+`/api/users`
+* GET -> Gets all users in the queue
+* POST -> Adds users to the end of the queue
+* DELETE -> Deletes the user at the front of the queue
 
-### `npm test`
+## Technology/Frameworks Used:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* HTML
+* CSS
+* JavaScript
+* React
+* Express
+* Node.js
+* Zeit
+* Heroku
+* Git
+* GitHub
+* Visual Studio Code
+* Postman
 
-### `npm run build`
+## Installation:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### [Petful Server]()
+* Install dependencies: `npm install`
+* Prepare environment file: `.env`
+* Start server with `npm start`
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### [Petful Client]()
+* Install dependencies: `npm install`
+* Start app with `npm start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Credits:
+Created by Adrienne and Whitney
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

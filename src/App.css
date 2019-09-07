@@ -8,8 +8,8 @@
   flex-direction: column;
   justify-content: center;
   background-color: white;
-  margin-top: 115px;
-  min-height: 84vh;
+  margin-top: 85px;
+  height: 100vh;
 }
 
 /* MEDIA QUERIES */
@@ -20,8 +20,3 @@
   }
 }
 
-/* @media only screen and (min-width: 1200px) {
-  .main-container {
-    max-width: 1200px;
-  }
-} */

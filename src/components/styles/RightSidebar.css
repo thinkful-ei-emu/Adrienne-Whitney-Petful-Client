@@ -9,6 +9,10 @@
   font-family: 'Fredericka the Great', cursive;
 }
 
+.RightSidebar-container ul {
+  list-style: none;
+}
+
 /* MEDIA QUERIES */
 @media only screen and (min-width: 600px) {
   .RightSidebar-container {

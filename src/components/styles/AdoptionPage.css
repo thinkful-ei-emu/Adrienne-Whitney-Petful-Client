@@ -7,6 +7,11 @@
   font-size: 30px;
 }
 
+.AdoptionPage-container h4, p, li, img, ul {
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
 .AdoptionPage-container section {
   display: flex;
   flex-direction: column;

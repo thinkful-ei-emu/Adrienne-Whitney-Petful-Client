@@ -31,41 +31,33 @@ class App extends React.Component {
           currentUser: users[0],
         })
       })
+      petServices.getPet('dog')
+       .then((dog) => {
+         const currDog = dog.first ? dog.first.value : [];
+         this.setState({dog: currDog})
+       })
+       
+       petServices.getPet('cat')
+         .then((cat) => {
+           const currCat = cat.first ? cat.first.value : [];
+           this.setState({cat: currCat})
+         });
   }
 
+  addUser = () => {
+    this.setState({
+      usersQueue: [...this.state.usersQueue, 'YOU!']
+    })
+  }
 
   handleDelete = () => {
-    console.log('DELETING FIRST IN QUEUE');
     usersService.deleteUser();
     this.setState({
       usersQueue: this.state.usersQueue.filter(users => users !== this.state.currentUser),
-      currentUser: this.state.usersQueue[0],
+      currentUser: this.state.usersQueue[1],
     })
   }
-  
-    // // when user clicks adopt, take pet out of state and tell server to delete
-    // handleAdopt = (pet) => {
-    //   // Determines if the adopted pet is a cat or dog
-    //   // If it is a cat, removes from state
-    //   if (pet === 'cat') {
-    //     let adoptedCat = this.state.cat;
-  
-    //   } else {
-    //     let adoptedDog = this.state.dog.name;
-    //     console.log(this.state.dog.name);
-        
-    //     this.setState({
-    //       adoptedPets: this.state.adoptedPets.push(adoptedDog)
-    //     });
-    //     console.log(this.state.adoptedPets);
-  
-    //     petServices.deletePet(pet)
-    //       .then((dog) => {
-            
-    //       })
-    //   }
-      
-    // }
+
 
   handleAdopt = (pet) => {
     if (pet === 'cat') {
@@ -88,19 +80,17 @@ class App extends React.Component {
         if (pet === 'cat') {
           petServices.getPet('cat')
           .then((cat) => {
-            const newCat = cat.first.value;
+            const newCat = cat.first ? cat.first.value : [];
             this.setState({cat: newCat})
           })
-          console.log('adopted pets', this.state.adoptedPets);
         } else {
           petServices.getPet('dog')
           .then((dog) => {
-            const newDog = dog.first.value;
+            const newDog = dog.first ? dog.first.value : [];
             this.setState({dog: newDog})
           })
         }
       })
-    console.log('adopted', this.props.adoptedPets);
   }
 
   render() {
@@ -110,7 +100,6 @@ class App extends React.Component {
       adoptedPets: this.state.adoptedPets,
       handleAdopt: this.handleAdopt
     }
-    console.log('rendering app.js');
     return (
       <AppContext.Provider value={contextValue}>
       <div className="App">
@@ -127,6 +116,7 @@ class App extends React.Component {
             adoptedPets={this.state.adoptedPets}
             cat={this.state.cat}
             dog={this.state.dog}
+            addUser={this.addUser}
             />
           )} 
         />
