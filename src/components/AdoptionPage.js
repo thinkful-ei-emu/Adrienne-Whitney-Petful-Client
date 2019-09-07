@@ -12,34 +12,20 @@ class AdoptionPage extends React.Component {
   state = {
     dog: null,
     cat: null,
-  //   // adoptedPets: this.props.adoptedPets
   }
   // when the component mounts, get the dog and cat queues from server
-  // issue because only runs once so it is not rerendering
   componentDidMount() {
-    console.log('component will mount');
    petServices.getPet('dog')
     .then((dog) => {
-      this.setState({dog})
+      const currDog = dog.first.value;
+      this.setState({dog: currDog})
     })
     petServices.getPet('cat')
       .then((cat) => {
-        this.setState({cat})
+        const currCat = cat.first.value;
+        this.setState({cat: currCat})
       });
   }
-
-  // this is causing page to be continually updated and then making page really slow which is not good
-  // added to solve problem of app not rerendering
-  // componentDidUpdate() {
-  //   petServices.getPet('dog')
-  //   .then((dog) => {
-  //     this.setState({dog})
-  //   })
-  //   petServices.getPet('cat')
-  //     .then((cat) => {
-  //       this.setState({cat})
-  //     });
-  // }
 
   // when user clicks adopt, take pet out of state and tell server to delete
   // will need to move to app.js and pass down as props to adoption and right sidebar
@@ -76,7 +62,7 @@ class AdoptionPage extends React.Component {
 
   onSubmit = (e) => {
     let petType = e.target.value;
-    this.handleAdopt(petType);
+    this.context.handleAdopt(petType);
   }
 
   // when user clicks Nevermind, take user out of queue
@@ -85,14 +71,11 @@ class AdoptionPage extends React.Component {
   }
 
   render() {
-    console.log('rendering');
     const cat = this.state.cat;
     const dog = this.state.dog;
     return(
       <AppContext.Consumer>
         {(context) => (
-
-        
       <main>
       {/* Should only come on when "YOU" is first in queue */}
         <h2>It's your turn to adopt!</h2>
