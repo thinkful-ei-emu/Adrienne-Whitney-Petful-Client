@@ -5,6 +5,9 @@ Petful is an app that utilizes the Queue data structure to create a FIFO (First 
 
 Live Link: [Petful App]()
 
+## Screenshots
+
+
 ## API Documentation
 `/api/cats`
 * GET -> Gets current cat at the front of the queue
@@ -36,12 +39,12 @@ Live Link: [Petful App]()
 
 ## Installation:
 
-### [Petful Server]()
+### [Petful Server](https://github.com/thinkful-ei-emu/petful-server-adrienne-whitney)
 * Install dependencies: `npm install`
 * Prepare environment file: `.env`
 * Start server with `npm start`
 
-### [Petful Client]()
+### [Petful Client](https://github.com/thinkful-ei-emu/Adrienne-Whitney-Petful-Client)
 * Install dependencies: `npm install`
 * Start app with `npm start`
 
