@@ -2,16 +2,22 @@ import React from 'react';
 // import catServices from '../services/cat-services';
 import petServices from '../services/pet-services';
 import './styles/AdoptionPage.css';
-import config from '../config';
+import AppContext from '../AppContext';
 
+
+// need page to rerender once a pet has been deleted
 class AdoptionPage extends React.Component {
+  static contextType = AppContext;
+
   state = {
     dog: null,
     cat: null,
-    adoptedPets: []
+  //   // adoptedPets: this.props.adoptedPets
   }
   // when the component mounts, get the dog and cat queues from server
+  // issue because only runs once so it is not rerendering
   componentDidMount() {
+    console.log('component will mount');
    petServices.getPet('dog')
     .then((dog) => {
       this.setState({dog})
@@ -22,61 +28,71 @@ class AdoptionPage extends React.Component {
       });
   }
 
+  // this is causing page to be continually updated and then making page really slow which is not good
+  // added to solve problem of app not rerendering
+  // componentDidUpdate() {
+  //   petServices.getPet('dog')
+  //   .then((dog) => {
+  //     this.setState({dog})
+  //   })
+  //   petServices.getPet('cat')
+  //     .then((cat) => {
+  //       this.setState({cat})
+  //     });
+  // }
+
   // when user clicks adopt, take pet out of state and tell server to delete
-  handleAdopt = (pet) => {
-    // Determines if the adopted pet is a cat or dog
-    // If it is a cat, removes from state
-    if (pet === 'cat') {
-      let adoptedCat = this.state.cat;
-      // let availableCats = this.state.cat.filter(cat => cat.name !== adoptedCat.name);
-
-      // this.setState({
-      //   cats: availableCats,
-      //   adoptedPets: [...this.state.adoptedPets, adoptedCat]
-      // })
-
-    // Tell the server to delete the pet from queue
-    // petServices.deletePet(pet)
-    } else {
-      let adoptedDog = this.state.dog.name;
-      console.log(this.state.dog.name);
-      // let availableDogs = this.state.dogs.filter(dog => dog.name !== adoptedDog.name);
-
-      // this.setState({
-      //   dogs: availableDogs,
-      //   adoptedPets: [...this.state.adoptedPets, adoptedDog]
-      // })
-      // this is updating the state correctly but need to get it to render in the right hand thing
-      this.setState({
-        adoptedPets: this.state.adoptedPets.push(adoptedDog)
-      });
-      console.log(this.state.adoptedPets);
-
-      petServices.deletePet(adoptedDog)
-        .then((dog) => {
-          
-        })
-      // Tell the server to delete the pet from queue
-      // hmmm how to fix this, don't want to have to do two handle adoption functions
-    // petServices.deletePet(pet)
-    }
-    
-  }
+  // will need to move to app.js and pass down as props to adoption and right sidebar
+  // handleAdopt = (pet) => {
+  //   console.log('props', this.props.adoptedPets);
+  //   petServices.deletePet(pet);
+  //   // Determines if the adopted pet is a cat or dog
+  //   if (pet === 'cat') {
+  //     let adoptedCat = this.state.cat.name;
+  //     petServices.getPet('cat')
+  //     .then((cat) => {
+  //       console.log('new cat?',cat.name);
+  //       const tempAdopted = this.props.adoptedPets;
+  //       tempAdopted.push(adoptedCat);
+  //       console.log('tempAdopted', tempAdopted);
+  //       this.setState({cat, adoptedPets: tempAdopted})
+  //       this.forceUpdate();
+  //     })
+  //     console.log('adopted pets', this.state.adoptedPets);
+  //   } else {
+  //     let adoptedDog = this.state.dog.name;
+  //     petServices.getPet('dog')
+  //     .then((dog) => {
+  //       console.log('new dog?',dog.name);
+  //       const tempAdopted = this.props.adoptedPets;
+  //       tempAdopted.push(adoptedDog);
+  //       console.log('tempAdopted', tempAdopted);
+  //       this.setState({dog, adoptedPets: tempAdopted})
+  //       this.forceUpdate();
+  //     })
+  //   }
+  //   console.log('adopted', this.props.adoptedPets);
+  // }
 
   onSubmit = (e) => {
     let petType = e.target.value;
     this.handleAdopt(petType);
   }
 
-  // when user clicks Nevermind, take user out of 
+  // when user clicks Nevermind, take user out of queue
   handleCancel = () => {
     this.props.history.push('/');
   }
 
   render() {
+    console.log('rendering');
     const cat = this.state.cat;
     const dog = this.state.dog;
     return(
+      <AppContext.Consumer>
+        {(context) => (
+
+        
       <main>
       {/* Should only come on when "YOU" is first in queue */}
         <h2>It's your turn to adopt!</h2>
@@ -127,6 +143,8 @@ class AdoptionPage extends React.Component {
         
       </div>
     </main>
+        )}
+    </AppContext.Consumer>
     )
   }
   

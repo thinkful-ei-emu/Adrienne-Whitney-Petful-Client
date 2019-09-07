@@ -9,12 +9,12 @@ const petServices = {
     });
   },
 
-  deletePet(pet) {
-    return fetch(`${config.API_ENDPOINT}/${pet}`, {
+  deletePet(petType) {
+    return fetch(`${config.API_ENDPOINT}/${petType}`, {
       method: "DELETE",
       body: JSON.stringify({
         // this will need to be changed probably
-        pet
+        petType
       })
     }).then(res => {
       if (!res.ok) {
