@@ -1,7 +1,7 @@
 {
- "version": 1,
- "name": "w-a-petful",
- "alias": "w-a-petful",
+ "version": 2,
+ "name": "a-w-petful",
+ "alias": "a-w-petful",
  "routes": [
    {
      "src": "^/static/(.*)",
