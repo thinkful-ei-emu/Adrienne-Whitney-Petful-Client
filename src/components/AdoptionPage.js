@@ -10,7 +10,7 @@ class AdoptionPage extends React.Component {
     dog: null,
     cat: null,
     adoptedPets: [],
-    disabled: true,
+    timer: null,
   }
 
   //when the component mounts, get the dog and cat queues from server
@@ -24,8 +24,26 @@ class AdoptionPage extends React.Component {
       .then((cat) => {
         this.setState({cat})
       });
-    this.props.startTimer();
+    this.startTimer();
     userService.postUser('YOU!');
+  }
+
+  componentWillUnmount() {
+    this.clearTimer();
+  }
+
+  startTimer() {
+    console.log('STARTED A TIMER');
+    console.log(this.props);
+    let timer = setInterval(this.props.handleDelete, 15000);
+    this.setState({
+      timer: timer,
+    })
+  };
+
+  clearTimer(timer) {
+    console.log('TIMER CLEARED');
+    clearInterval(this.state.timer);
   }
 
   // when user clicks adopt, take pet out of state and tell server to delete
@@ -77,7 +95,10 @@ class AdoptionPage extends React.Component {
   // when user clicks Nevermind, take user out of 
   handleCancel = () => {
     this.props.history.push('/')
-    //this.props.clearTimer(timer);
+  }
+
+  componentWillUnmount() {
+    this.clearTimer();
   }
 
   render() {
@@ -104,7 +125,7 @@ class AdoptionPage extends React.Component {
             </section>
             <p>Description: {cat.imageDescription}</p>
             <p>Shelter Story: {cat.story}</p>
-            <button disabled={this.state.disabled ? 'true' : 'false'} value='cat' onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
+            <button disabled={this.props.currentUser !== 'YOU!' ? true : false} value='cat' onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
             <button onClick={this.handleCancel}>Nevermind</button>
           </section> 
           : ''}
@@ -126,7 +147,7 @@ class AdoptionPage extends React.Component {
             </section>
             <p>Description: {dog.imageDescription}</p>
             <p>Shelter Story: {dog.story}</p>
-            <button disabled={this.state.disabled ? 'true' : 'false'} value='dog' onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
+            <button disabled={this.props.currentUser !== 'YOU!' ? true : false} value='dog' onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
             <button onClick={this.handleCancel}>Nevermind</button>
           </section> 
          : ''}

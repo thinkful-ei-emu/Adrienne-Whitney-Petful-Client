@@ -12,7 +12,7 @@ import './App.css';
 class App extends React.Component {
 
   state = {
-    timers: false,
+    timer: [],
     usersQueue: [],
     currentUser: [],
   }
@@ -28,17 +28,6 @@ class App extends React.Component {
       })
   }
 
-  startTimer = () => {
-    this.handleTimer();
-    this.setState({
-      timers: true,
-    })
-  }
-
-  handleTimer = () => {
-    console.log('STARTED A TIMER');
-    let timer = setInterval(this.handleDelete, 15000);
-  }
 
   handleDelete = () => {
     console.log('DELETING FIRST IN QUEUE');
@@ -46,17 +35,9 @@ class App extends React.Component {
     this.setState({
       usersQueue: this.state.usersQueue.filter(users => users !== this.state.currentUser),
       currentUser: this.state.usersQueue[0],
-      timers: !this.state.timers,
     })
   }
-
-  // NEED TO FIND A PLACE FOR THIS - WHEN LANDING PAGES MOUNTS?
-  // clearTimer = (timer) => {
-  //   clearInterval(timer);
-  //   this.setState({
-  //     timers: false,
-  //   })
-  // }
+  
 
   render() {
     return (
@@ -64,13 +45,13 @@ class App extends React.Component {
       
       <Header />
       <main className="main-container">
-        <LeftSidebar usersQueue={this.state.usersQueue}/>
+        <LeftSidebar usersQueue={this.state.usersQueue} />
         <Route exact path='/' component={LandingPage} />
         <Route path='/adopt' render={({history}) => (
           <AdoptionPage
             history={history}
-            startTimer={this.startTimer}
-            //clearTimer={this.clearTimer}
+            currentUser={this.state.currentUser}
+            handleDelete={this.handleDelete}
             />
           )} 
         />
