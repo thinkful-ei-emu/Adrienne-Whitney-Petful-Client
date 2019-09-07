@@ -2,8 +2,13 @@ import React from 'react';
 import petServices from '../services/pet-services';
 import userService from '../services/users-service';
 import './styles/AdoptionPage.css';
+import AppContext from '../AppContext';
 
+
+// need page to rerender once a pet has been deleted
 class AdoptionPage extends React.Component {
+  static contextType = AppContext;
+
   state = {
     dog: null,
     cat: null,
@@ -12,22 +17,19 @@ class AdoptionPage extends React.Component {
   }
 
   //when the component mounts, get the dog and cat queues from server
-  
   componentDidMount() {
    petServices.getPet('dog')
     .then((dog) => {
-      this.setState({dog})
+      const currDog = dog.first.value;
+      this.setState({dog: currDog})
     })
     petServices.getPet('cat')
       .then((cat) => {
-        this.setState({cat})
+        const currCat = cat.first.value;
+        this.setState({cat: currCat})
       });
     this.startTimer();
     userService.postUser('YOU!');
-  }
-
-  componentWillUnmount() {
-    this.clearTimer();
   }
 
   startTimer() {
@@ -44,39 +46,45 @@ class AdoptionPage extends React.Component {
     clearInterval(this.state.timer);
   }
 
-  // when user clicks adopt, take pet out of state and tell server to delete
-  handleAdopt = (pet) => {
-    // Determines if the adopted pet is a cat or dog
-    // If it is a cat, removes from state
-    if (pet === 'cat') {
-      let adoptedCat = this.state.cat;
-
-    } else {
-      let adoptedDog = this.state.dog.name;
-      console.log(this.state.dog.name);
-      
-      this.setState({
-        adoptedPets: this.state.adoptedPets.push(adoptedDog)
-      });
-      console.log(this.state.adoptedPets);
-
-      petServices.deletePet(pet)
-        .then((dog) => {
-          
-        })
-    }
-    
-  }
+  // when user clicks Nevermind, take user to landing page
+  // will need to move to app.js and pass down as props to adoption and right sidebar
+  // handleAdopt = (pet) => {
+  //   console.log('props', this.props.adoptedPets);
+  //   petServices.deletePet(pet);
+  //   // Determines if the adopted pet is a cat or dog
+  //   if (pet === 'cat') {
+  //     let adoptedCat = this.state.cat.name;
+  //     petServices.getPet('cat')
+  //     .then((cat) => {
+  //       console.log('new cat?',cat.name);
+  //       const tempAdopted = this.props.adoptedPets;
+  //       tempAdopted.push(adoptedCat);
+  //       console.log('tempAdopted', tempAdopted);
+  //       this.setState({cat, adoptedPets: tempAdopted})
+  //       this.forceUpdate();
+  //     })
+  //     console.log('adopted pets', this.state.adoptedPets);
+  //   } else {
+  //     let adoptedDog = this.state.dog.name;
+  //     petServices.getPet('dog')
+  //     .then((dog) => {
+  //       console.log('new dog?',dog.name);
+  //       const tempAdopted = this.props.adoptedPets;
+  //       tempAdopted.push(adoptedDog);
+  //       console.log('tempAdopted', tempAdopted);
+  //       this.setState({dog, adoptedPets: tempAdopted})
+  //       this.forceUpdate();
+  //     })
+  //   }
+  //   console.log('adopted', this.props.adoptedPets);
+  // }
 
   onSubmit = (e) => {
     let petType = e.target.value;
-    this.handleAdopt(petType);
-    // return to landing page
-    // or if we want to keep showing dogs and cats
-    //this.props.history.push('/')
+    this.context.handleAdopt(petType);
   }
 
-  // when user clicks Nevermind, take user to landing page
+  // when user clicks Nevermind, take user out of queue
   handleCancel = () => {
     this.props.history.push('/')
   }
@@ -90,6 +98,8 @@ class AdoptionPage extends React.Component {
     const cat = this.state.cat;
     const dog = this.state.dog;
     return(
+      <AppContext.Consumer>
+        {(context) => (
       <main>
       {/* Should only come on when "YOU" is first in queue */}
         <h2>It's your turn to adopt!</h2>
@@ -148,6 +158,8 @@ class AdoptionPage extends React.Component {
         
       </div>
     </main>
+        )}
+    </AppContext.Consumer>
     )
   }
   

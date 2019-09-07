@@ -8,6 +8,8 @@ import RightSidebar from './components/RightSidebar';
 import Footer from './components/Footer';
 import usersService from './services/users-service';
 import './App.css';
+import petServices from './services/pet-services';
+import AppContext from './AppContext';
 
 class App extends React.Component {
 
@@ -38,9 +40,81 @@ class App extends React.Component {
     })
   }
   
+  state = {
+    adoptedPets: [],
+    dog: [],
+    cat: [],
+  }
+
+
+    // // when user clicks adopt, take pet out of state and tell server to delete
+    // handleAdopt = (pet) => {
+    //   // Determines if the adopted pet is a cat or dog
+    //   // If it is a cat, removes from state
+    //   if (pet === 'cat') {
+    //     let adoptedCat = this.state.cat;
+  
+    //   } else {
+    //     let adoptedDog = this.state.dog.name;
+    //     console.log(this.state.dog.name);
+        
+    //     this.setState({
+    //       adoptedPets: this.state.adoptedPets.push(adoptedDog)
+    //     });
+    //     console.log(this.state.adoptedPets);
+  
+    //     petServices.deletePet(pet)
+    //       .then((dog) => {
+            
+    //       })
+    //   }
+      
+    // }
+
+  handleAdopt = (pet) => {
+    if (pet === 'cat') {
+      petServices.getPet('cat')
+      .then((cat) => {
+        const originalCat = cat.first.value.name;
+        this.setState({adoptedPets: [...this.state.adoptedPets, originalCat]})
+      })
+    } else {
+      petServices.getPet('dog')
+      .then((dog) => {
+        const originalDog = dog.first.value.name;
+        this.setState({adoptedPets: [...this.state.adoptedPets, originalDog]})
+      })
+    }
+
+    petServices.deletePet(pet)
+      .then(() => {
+    // Determines if the adopted pet is a cat or dog
+        if (pet === 'cat') {
+          petServices.getPet('cat')
+          .then((cat) => {
+            const newCat = cat.first.value;
+            this.setState({cat: newCat})
+          })
+          console.log('adopted pets', this.state.adoptedPets);
+        } else {
+          petServices.getPet('dog')
+          .then((dog) => {
+            const newDog = dog.first.value;
+            this.setState({dog: newDog})
+          })
+        }
+      })
+    console.log('adopted', this.props.adoptedPets);
+  }
 
   render() {
+    const contextValue = {
+      adoptedPets: this.state.adoptedPets,
+      handleAdopt: this.handleAdopt
+    }
+    console.log('rendering app.js');
     return (
+      <AppContext.Provider value={contextValue}>
       <div className="App">
       
       <Header />
@@ -52,14 +126,16 @@ class App extends React.Component {
             history={history}
             currentUser={this.state.currentUser}
             handleDelete={this.handleDelete}
+            adoptedPets={this.state.adoptedPets}
             />
           )} 
         />
-        <RightSidebar />
+        <RightSidebar adoptedPets={this.state.adoptedPets} />
       </main>
       <Footer />
         
       </div>
+      </AppContext.Provider>
     );
   }
   
