@@ -35,7 +35,7 @@ class AdoptionPage extends React.Component {
   startTimer() {
     console.log('STARTED A TIMER');
     console.log(this.props);
-    let timer = setInterval(this.props.handleDelete, 15000);
+    let timer = setInterval(this.props.handleDelete, 1500);
     this.setState({
       timer: timer,
     })
@@ -122,7 +122,7 @@ class AdoptionPage extends React.Component {
             <p>Shelter Story: {cat.story}</p>
             <button 
               className={this.props.currentUser !== 'YOU!' ? 'disabled' : 'enabled'} 
-              //disabled={this.props.currentUser !== 'YOU!' ? true : false} 
+              disabled={this.props.currentUser !== 'YOU!' ? true : false} 
               value='cat' 
               onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
             <button onClick={this.handleCancel}>Nevermind</button>
@@ -148,7 +148,7 @@ class AdoptionPage extends React.Component {
             <p>Shelter Story: {dog.story}</p>
             <button 
               className={this.props.currentUser !== 'YOU!' ? 'disabled' : 'enabled'} 
-              //disabled={this.props.currentUser !== 'YOU!' ? true : false} 
+              disabled={this.props.currentUser !== 'YOU!' ? true : false} 
               value='dog' 
               onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
             <button onClick={this.handleCancel}>Nevermind</button>
