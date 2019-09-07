@@ -103,7 +103,7 @@ class AdoptionPage extends React.Component {
                     <p>Shelter Story: {dog.story}</p>
                     <button
                       className={this.props.currentUser !== 'YOU!' ? 'disabled' : 'enabled'}
-                      // disabled={this.props.currentUser !== 'YOU!' ? true : false}
+                      disabled={this.props.currentUser !== 'YOU!' ? true : false}
                       value='dog'
                       onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
                     <button onClick={this.handleCancel}>Nevermind</button>
