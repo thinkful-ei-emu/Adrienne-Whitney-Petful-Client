@@ -14,6 +14,9 @@ import AppContext from './AppContext';
 class App extends React.Component {
 
   state = {
+    adoptedPets: [],
+    dog: [],
+    cat: [],
     timer: [],
     usersQueue: [],
     currentUser: [],
@@ -40,13 +43,6 @@ class App extends React.Component {
     })
   }
   
-  state = {
-    adoptedPets: [],
-    dog: [],
-    cat: [],
-  }
-
-
     // // when user clicks adopt, take pet out of state and tell server to delete
     // handleAdopt = (pet) => {
     //   // Determines if the adopted pet is a cat or dog
@@ -109,6 +105,8 @@ class App extends React.Component {
 
   render() {
     const contextValue = {
+      dog: this.state.dog,
+      cat: this.state.cat,
       adoptedPets: this.state.adoptedPets,
       handleAdopt: this.handleAdopt
     }
@@ -127,6 +125,8 @@ class App extends React.Component {
             currentUser={this.state.currentUser}
             handleDelete={this.handleDelete}
             adoptedPets={this.state.adoptedPets}
+            cat={this.state.cat}
+            dog={this.state.dog}
             />
           )} 
         />

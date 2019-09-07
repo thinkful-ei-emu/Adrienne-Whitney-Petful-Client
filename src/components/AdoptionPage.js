@@ -28,7 +28,7 @@ class AdoptionPage extends React.Component {
         const currCat = cat.first.value;
         this.setState({cat: currCat})
       });
-    this.startTimer();
+    // this.startTimer();
     userService.postUser('YOU!');
   }
 
@@ -95,8 +95,9 @@ class AdoptionPage extends React.Component {
   }
 
   render() {
-    const cat = this.state.cat;
-    const dog = this.state.dog;
+    const cat = this.context.cat;
+    const dog = this.context.dog;
+    console.log('cat.context',cat);
     return(
       <AppContext.Consumer>
         {(context) => (
@@ -122,7 +123,7 @@ class AdoptionPage extends React.Component {
             <p>Shelter Story: {cat.story}</p>
             <button 
               className={this.props.currentUser !== 'YOU!' ? 'disabled' : 'enabled'} 
-              disabled={this.props.currentUser !== 'YOU!' ? true : false} 
+              // disabled={this.props.currentUser !== 'YOU!' ? true : false} 
               value='cat' 
               onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
             <button onClick={this.handleCancel}>Nevermind</button>
@@ -148,7 +149,7 @@ class AdoptionPage extends React.Component {
             <p>Shelter Story: {dog.story}</p>
             <button 
               className={this.props.currentUser !== 'YOU!' ? 'disabled' : 'enabled'} 
-              disabled={this.props.currentUser !== 'YOU!' ? true : false} 
+              // disabled={this.props.currentUser !== 'YOU!' ? true : false} 
               value='dog' 
               onClick={(e) => this.onSubmit(e)}>Adopt Me!</button>
             <button onClick={this.handleCancel}>Nevermind</button>
