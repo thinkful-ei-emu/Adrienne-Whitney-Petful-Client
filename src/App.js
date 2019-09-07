@@ -24,17 +24,24 @@ class App extends React.Component {
 
   handleTimer = () => {
     console.log('STARTED A TIMER');
-    setTimeout(this.handleDelete, 15000);
+    let timer = setInterval(this.handleDelete, 15000);
   }
 
   handleDelete = () => {
+    console.log('DELETING FIRST IN QUEUE');
     userService.deleteUser();
     this.handleTimer();
+    this.setState({
+      timers: !this.state.timers,
+    })
   }
 
-  componentWillUnmount() {
-    clearTimeout();
-  }
+  // clearTimer = (timer) => {
+  //   clearInterval(timer);
+  //   this.setState({
+  //     timers: false,
+  //   })
+  // }
 
   render() {
     return (
@@ -44,9 +51,11 @@ class App extends React.Component {
       <main className="main-container">
         <LeftSidebar />
         <Route exact path='/' component={LandingPage} />
-        <Route path='/adopt' render={() => (
+        <Route path='/adopt' render={({history}) => (
           <AdoptionPage
+            history={history}
             startTimer={this.startTimer}
+            //clearTimer={this.clearTimer}
             />
           )} 
         />

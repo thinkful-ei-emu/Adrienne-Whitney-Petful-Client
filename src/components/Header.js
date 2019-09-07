@@ -5,7 +5,7 @@ function Header() {
 
   return(
     <div className='Header-container'>
-      <h1>Petful</h1>
+        <h1>Petful</h1>
     </div>
   )
 }

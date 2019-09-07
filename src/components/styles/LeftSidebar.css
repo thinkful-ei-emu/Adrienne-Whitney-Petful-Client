@@ -1,5 +1,5 @@
 .LeftSidebar-container {
-  background-color: lightgray;
+  background-color: lightblue;
   text-align: left;
 }
 
@@ -23,5 +23,6 @@ li {
 @media only screen and (min-width: 600px) {
   .LeftSidebar-container {
     width: 20%;
+    margin-bottom: 20px;
   }
 }

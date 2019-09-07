@@ -20,17 +20,16 @@ const usersService = {
         name
       })
     }).then(res => {
-      return !res.ok ? res.json().then(e => Promise.reject(e)) : res.json();
+      if (!res.ok) {
+        throw new Error("Something went wrong!  Please try again.");
+      }
     });
   },
 
-  deleteUser(id) {
-    return fetch(`${config.API_ENDPOINT}/users/${id}`, {
-      method: "DELETE",
-      body: JSON.stringify({
-        id
-      })
-    }).then(res => {
+  deleteUser() {
+    return fetch(`${config.API_ENDPOINT}/users`, {
+      method: "DELETE"})
+      .then(res => {
       if (!res.ok) {
         throw new Error("Something went wrong!  Please try again.");
       }

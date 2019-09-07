@@ -1,16 +1,33 @@
 import React from 'react';
+import usersService from '../services/users-service';
 import './styles/LeftSidebar.css';
 
 class LeftSidebar extends React.Component {
 
   state = {
-    usersQueue: ['Chris', 'Tara', 'YOU!', 'Zane', 'Arpan'],
+    usersQueue: [],
   }
 
   // Fetch user queue from server?
   componentDidMount() {
-    
+    usersService.getUsers()
+      .then(users => {
+        this.setState({
+          usersQueue: users
+        })
+      })
   }
+
+  componentDidUpdate() {
+    usersService.getUsers()
+      .then(users => {
+        this.setState({
+          usersQueue:users
+        })
+      })
+  }
+
+
 
 
   render() {

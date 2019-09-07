@@ -1,3 +1,3 @@
 export default {
-  API_ENDPOINT: 'http://localhost:8000/api', //heroku server address,
+  API_ENDPOINT: 'http://localhost:8080/api', //heroku server address,
 };

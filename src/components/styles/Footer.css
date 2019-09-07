@@ -1,5 +1,6 @@
 .Footer-container {
-  background-color: lightgray;
+  background-color: white;
+  border-top: 1px solid lightblue;
   position: fixed;
   bottom: 0;
   left: 0;
