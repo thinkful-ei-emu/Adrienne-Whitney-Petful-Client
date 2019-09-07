@@ -1,5 +1,4 @@
 import React from 'react';
-import userService from '../services/users-service';
 import dogWithGlasses from '../images/landing-page-photo-min.jpg';
 import './styles/LandingPage.css';
 import {Link} from 'react-router-dom';

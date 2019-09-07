@@ -6,13 +6,26 @@ import LandingPage from './components/LandingPage';
 import AdoptionPage from './components/AdoptionPage';
 import RightSidebar from './components/RightSidebar';
 import Footer from './components/Footer';
-import userService from './services/users-service';
+import usersService from './services/users-service';
 import './App.css';
 
 class App extends React.Component {
 
   state = {
     timers: false,
+    usersQueue: [],
+    currentUser: [],
+  }
+
+  componentDidMount() {
+    usersService.getUsers()
+      .then(users => {
+        
+        this.setState({
+          usersQueue: users,
+          currentUser: users[0],
+        })
+      })
   }
 
   startTimer = () => {
@@ -29,9 +42,10 @@ class App extends React.Component {
 
   handleDelete = () => {
     console.log('DELETING FIRST IN QUEUE');
-    userService.deleteUser();
-    this.handleTimer();
+    usersService.deleteUser();
     this.setState({
+      usersQueue: this.state.usersQueue.filter(users => users !== this.state.currentUser),
+      currentUser: this.state.usersQueue[0],
       timers: !this.state.timers,
     })
   }
@@ -49,7 +63,7 @@ class App extends React.Component {
       
       <Header />
       <main className="main-container">
-        <LeftSidebar />
+        <LeftSidebar usersQueue={this.state.usersQueue}/>
         <Route exact path='/' component={LandingPage} />
         <Route path='/adopt' render={({history}) => (
           <AdoptionPage
