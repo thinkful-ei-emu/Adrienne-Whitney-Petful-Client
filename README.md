@@ -6,7 +6,14 @@ Petful is an app that utilizes the Queue data structure to create a FIFO (First 
 Live Link: [Petful App]()
 
 ## Screenshots
-
+- Landing Page
+![](./screenshots/LandingPage.png)
+- Adoption Page
+![](./screenshots/AdoptionPage.png)
+- Your Turn to Adopt!
+![](./screenshots/YourTurn.png)
+- After Adoption
+![](./screenshots/Adopted.png)
 
 ## API Documentation
 `/api/cats`
