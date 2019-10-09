@@ -63,7 +63,7 @@ class Timer extends React.Component {
   }
 
   render() {
-    let timer = this.state.isOn ? <p className='timer-text'>Next Turn in: 0:{this.state.time}</p> : '';
+    let timer = this.state.isOn ? <p className='timer-text'>Next Turn in: 0:0{this.state.time}</p> : '';
     return (
       <div className='Timer'>
         {timer}
