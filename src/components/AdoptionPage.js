@@ -17,13 +17,9 @@ class AdoptionPage extends React.Component {
   // Starts adoption timer and adds YOU to the queue
   componentDidMount() {
     this.startTimer();
-    // console.log(this.state.catTimer, 'catTimer');
-    if(this.props.usersQueue[this.props.usersQueue.length-1] === 'YOU!') {
-      return;
-    } else {
-      userService.postUser('YOU!');
-      this.props.addUser();
-    }
+    userService.postUser('YOU!');
+    this.props.addUser();
+    this.props.handleTimerStart();
   }
 
   // Starts adoption timer
