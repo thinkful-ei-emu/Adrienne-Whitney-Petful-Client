@@ -68,46 +68,51 @@ class App extends React.Component {
     })
   }
 
-  handleAdopt = (pet) => {
-    if (pet === 'cat') {
-      petServices.getPet('cat')
-      .then((cat) => {
-        const originalCat = cat.first.value.name;
-        this.setState({adoptedPets: [...this.state.adoptedPets, originalCat]})
-      })
-    } else {
-      petServices.getPet('dog')
-      .then((dog) => {
-        const originalDog = dog.first.value.name;
-        this.setState({adoptedPets: [...this.state.adoptedPets, originalDog]})
-      })
-    }
+  handleAdoptCat = () => {
+    console.log('handleAdoptCat being called');
 
-    petServices.deletePet(pet)
+    petServices.getPet('cat')
+    .then((cat) => {
+      const originalCat = cat.first.value.name;
+      this.setState({adoptedPets: [...this.state.adoptedPets, originalCat]})
+    })
+    petServices.deletePet('cat')
       .then(() => {
-    // Determines if the adopted pet is a cat or dog
-        if (pet === 'cat') {
-          petServices.getPet('cat')
+    petServices.getPet('cat')
           .then((cat) => {
             const newCat = cat.first ? cat.first.value : [];
             this.setState({cat: newCat})
           })
-        } else {
-          petServices.getPet('dog')
+        })
+  }
+
+  handleAdoptDog = () => {
+    console.log('handleAdoptDog being called');
+    petServices.getPet('dog')
+    .then((dog) => {
+      const originalDog = dog.first.value.name;
+      this.setState({adoptedPets: [...this.state.adoptedPets, originalDog]})
+    })
+
+    petServices.deletePet('dog')
+      .then(() => {
+        petServices.getPet('dog')
           .then((dog) => {
             const newDog = dog.first ? dog.first.value : [];
             this.setState({dog: newDog})
-          })
-        }
       })
-  }
+  })
+}
+
+  
 
   render() {
     const contextValue = {
       dog: this.state.dog,
       cat: this.state.cat,
       adoptedPets: this.state.adoptedPets,
-      handleAdopt: this.handleAdopt,
+      handleAdoptCat: this.handleAdoptCat,
+      handleAdoptDog: this.handleAdoptDog,
       usersQueue: this.state.usersQueue
     }
     return (
@@ -129,7 +134,8 @@ class App extends React.Component {
             cat={this.state.cat}
             dog={this.state.dog}
             addUser={this.addUser}
-            handleAdopt={this.handleAdopt}
+            handleAdoptCat={this.handleAdoptCat}
+            handleAdoptDog={this.handleAdoptDog}
             usersQueue={this.state.usersQueue}
             handleTimerStart={this.handleTimerStart}
             />

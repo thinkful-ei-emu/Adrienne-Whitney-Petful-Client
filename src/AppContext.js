@@ -4,7 +4,8 @@ const AppContext = React.createContext({
   adoptedPets: [],
   // dog: [],
   // cat: [],
-  handleAdopt: () => {}
+  handleAdoptCat: () => {},
+  handleAdoptDog: () => {}
 });
 
 export default AppContext;

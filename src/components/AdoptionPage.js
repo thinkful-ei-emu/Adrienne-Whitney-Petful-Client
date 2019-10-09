@@ -11,11 +11,14 @@ class AdoptionPage extends React.Component {
     adoptedPets: [],
     timer: null,
     catTimer: null,
-    // dogTimer: null
+    dogTimer: null,
+    catTimer2: null,
+    dogTimer2: null,
   }
 
   // Starts adoption timer and adds YOU to the queue
   componentDidMount() {
+    console.log(this.props, 'PROPS');
     this.startTimer();
     userService.postUser('YOU!');
     this.props.addUser();
@@ -24,27 +27,35 @@ class AdoptionPage extends React.Component {
 
   // Starts adoption timer
   startTimer() {
-    let timer = setInterval(this.props.handleDelete, 10000);
-    let catTimer = setInterval(this.props.handleAdopt('cat'), 6000);
-    // let dogTimer = setTimeout(this.props.handleAdopt('dog'), 8000);
+    let timer = setInterval(this.props.handleDelete, 7000);
+    let catTimer = setTimeout(this.props.handleAdoptCat, 6000);
+    let dogTimer = setTimeout(this.props.handleAdoptDog, 12000);
+    let catTimer2 = setTimeout(this.props.handleAdoptCat, 17000);
+    let dogTimer2 = setTimeout(this.props.handleAdoptDog, 25000);
     this.setState({
       timer: timer,
       catTimer: catTimer,
-      // dogTimer: dogTimer
+      dogTimer: dogTimer
     })
   };
 
   // Clears adoption timer
   clearTimer(timer) {
     clearInterval(this.state.timer);
-    clearInterval(this.state.catTimer);
-    // clearInterval(this.state.dogTimer);
+    clearTimeout(this.state.catTimer);
+    clearTimeout(this.state.dogTimer);
+    clearTimeout(this.state.catTimer2);
+    clearTimeout(this.state.dogTimer2);
   }
 
   // Gets pet type and handles pet adoption in App
   onSubmit = (e) => {
     let petType = e.target.value;
-    this.context.handleAdopt(petType);
+    if (petType === 'cat') {
+      this.context.handleAdoptCat();
+    } else {
+      this.context.handleAdoptDog();
+    }
   }
 
   // Returns user to landing page
