@@ -10,7 +10,7 @@ class LeftSidebar extends React.Component {
         <li key={index}>{user}</li>
       )
     }) : ''
-    const timer = this.props.adoption ? <Timer adoption={this.props.adoption}/> : ''
+    const timer = this.props.adoption ? <Timer adoption={this.props.adoption}  usersQueue={this.props.usersQueue}/> : ''
 
     return (
       <div className='LeftSidebar-container'>

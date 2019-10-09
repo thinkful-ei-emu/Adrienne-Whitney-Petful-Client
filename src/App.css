@@ -6,7 +6,7 @@
 .main-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   background-color: white;
   margin-top: 85px;
   height: 100vh;
@@ -16,7 +16,9 @@
 
 @media only screen and (min-width:600px) {
   .main-container {
+    display: flex;
     flex-direction: row;
+    margin-top: 85px;
   }
 }
 

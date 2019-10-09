@@ -24,14 +24,19 @@ class Timer extends React.Component {
   }
 
   updateTimer = () => {
-    this.state.time > 0 ?
+    if(this.props.usersQueue.length > 0) {
+      this.state.time > 0 ?
     this.setState({
       time: (this.state.time - 1)
     }) : this.resetTimer();
+    } else {
+      this.stopTimer();
+    }
+    
   }
 
   stopTimer() {
-    this.clearInterval(this.state.timer);
+    clearInterval(this.state.timer);
     this.setState({
       time: 6,
     })

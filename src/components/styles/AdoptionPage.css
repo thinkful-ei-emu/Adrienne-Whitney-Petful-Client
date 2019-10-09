@@ -1,6 +1,9 @@
 .AdoptionPage-container {
   background-color: white;
   padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .AdoptionPage-container h2 {
@@ -10,12 +13,6 @@
 .AdoptionPage-container h4, p, li, img, ul {
   margin-top: 3px;
   margin-bottom: 5px;
-}
-
-.AdoptionPage-container section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .AdoptionPage-container button {
@@ -38,20 +35,21 @@
 
 .AdoptionPage-container img {
   width: 200px;
+  margin: 0 auto;
   border-radius: 10px;
   margin-bottom: 20px;
+  
 }
 
 .AdoptionPage-image-list-container, .AdoptionPage-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .AdoptionPage-container {
   padding-right: 10px;
   padding-left: 10px;
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
 }
 
@@ -65,5 +63,17 @@
 @media only screen and (min-width: 600px) {
   .AdoptionPage-container {
     min-width: 60vw;
+    flex-direction: row;
+  }
+
+  .AdoptionPage-container section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .AdoptionPage-image-list-container, .AdoptionPage-container {
+    display: flex;
+    flex-direction: row;
   }
 }
