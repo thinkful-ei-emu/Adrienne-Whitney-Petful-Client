@@ -11,6 +11,7 @@ const usersService = {
   },
 
   postUser(name) {
+    // need to prevent this call again if you is already in queue
     return fetch(`${config.API_ENDPOINT}/users`, {
       method: "POST",
       headers: {
@@ -20,6 +21,7 @@ const usersService = {
         name
       })
     }).then(res => {
+      // console.log(res);
       if (!res.ok) {
         throw new Error("Something went wrong!  Please try again.");
       }

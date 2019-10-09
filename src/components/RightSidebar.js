@@ -5,7 +5,6 @@ import AppContext from '../AppContext';
 class RightSidebar extends React.Component {
   static contextType = AppContext;
 
-
   render() {
     const adopted = this.context.adoptedPets ? this.context.adoptedPets.map((pet, index) => {
       return (

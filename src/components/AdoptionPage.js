@@ -10,26 +10,39 @@ class AdoptionPage extends React.Component {
   state = {
     adoptedPets: [],
     timer: null,
+    catTimer: null,
+    // dogTimer: null
   }
 
   // Starts adoption timer and adds YOU to the queue
   componentDidMount() {
     this.startTimer();
-    userService.postUser('YOU!');
-    this.props.addUser();
+    // console.log(this.state.catTimer, 'catTimer');
+    if(this.props.usersQueue[this.props.usersQueue.length-1] === 'YOU!') {
+      return;
+    } else {
+      userService.postUser('YOU!');
+      this.props.addUser();
+    }
   }
 
   // Starts adoption timer
   startTimer() {
-    let timer = setInterval(this.props.handleDelete, 15000);
+    let timer = setInterval(this.props.handleDelete, 10000);
+    let catTimer = setInterval(this.props.handleAdopt('cat'), 6000);
+    // let dogTimer = setTimeout(this.props.handleAdopt('dog'), 8000);
     this.setState({
       timer: timer,
+      catTimer: catTimer,
+      // dogTimer: dogTimer
     })
   };
 
   // Clears adoption timer
   clearTimer(timer) {
     clearInterval(this.state.timer);
+    clearInterval(this.state.catTimer);
+    // clearInterval(this.state.dogTimer);
   }
 
   // Gets pet type and handles pet adoption in App

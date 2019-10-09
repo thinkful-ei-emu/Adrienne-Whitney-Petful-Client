@@ -45,6 +45,9 @@ class App extends React.Component {
   }
 
   addUser = () => {
+    if(this.state.usersQueue[this.state.usersQueue.length-1] === 'YOU!') {
+      return this.state.usersQueue;
+    }
     this.setState({
       usersQueue: [...this.state.usersQueue, 'YOU!']
     })
@@ -98,7 +101,8 @@ class App extends React.Component {
       dog: this.state.dog,
       cat: this.state.cat,
       adoptedPets: this.state.adoptedPets,
-      handleAdopt: this.handleAdopt
+      handleAdopt: this.handleAdopt,
+      usersQueue: this.state.usersQueue
     }
     return (
       <AppContext.Provider value={contextValue}>
@@ -117,6 +121,9 @@ class App extends React.Component {
             cat={this.state.cat}
             dog={this.state.dog}
             addUser={this.addUser}
+            handleAdopt={this.handleAdopt}
+
+            usersQueue={this.state.usersQueue}
             />
           )} 
         />
