@@ -16,7 +16,7 @@ class LeftSidebar extends React.Component {
       <div className='LeftSidebar-container'>
         <h2>Queue</h2>
         {timer}
-        <ul>
+        <ul className='users'>
           {users}
         </ul>
       </div>

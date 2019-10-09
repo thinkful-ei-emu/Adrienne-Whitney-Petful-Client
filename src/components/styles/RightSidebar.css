@@ -13,6 +13,10 @@
   list-style: none;
 }
 
+.adopted-pets {
+  padding-left: 0;
+}
+
 /* MEDIA QUERIES */
 @media only screen and (min-width: 600px) {
   .RightSidebar-container {

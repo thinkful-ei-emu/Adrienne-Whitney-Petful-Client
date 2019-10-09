@@ -17,7 +17,7 @@ class RightSidebar extends React.Component {
           <div className='RightSidebar-container'>
             <h2>Forever Friends</h2>
             <p>These pets have already been adopted</p>
-            <ul>
+            <ul className="adopted-pets">
               {adopted}
             </ul>
           </div>

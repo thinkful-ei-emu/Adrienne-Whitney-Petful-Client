@@ -21,7 +21,6 @@ const usersService = {
         name
       })
     }).then(res => {
-      // console.log(res);
       if (!res.ok) {
         throw new Error("Something went wrong!  Please try again.");
       }

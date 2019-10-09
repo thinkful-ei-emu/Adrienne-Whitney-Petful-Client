@@ -18,7 +18,6 @@ class AdoptionPage extends React.Component {
 
   // Starts adoption timer and adds YOU to the queue
   componentDidMount() {
-    console.log(this.props, 'PROPS');
     this.startTimer();
     userService.postUser('YOU!');
     this.props.addUser();
@@ -35,7 +34,9 @@ class AdoptionPage extends React.Component {
     this.setState({
       timer: timer,
       catTimer: catTimer,
-      dogTimer: dogTimer
+      dogTimer: dogTimer,
+      catTimer2: catTimer2,
+      dogTimer2: dogTimer2
     })
   };
 

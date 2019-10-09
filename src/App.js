@@ -69,8 +69,6 @@ class App extends React.Component {
   }
 
   handleAdoptCat = () => {
-    console.log('handleAdoptCat being called');
-
     petServices.getPet('cat')
     .then((cat) => {
       const originalCat = cat.first.value.name;
@@ -87,7 +85,6 @@ class App extends React.Component {
   }
 
   handleAdoptDog = () => {
-    console.log('handleAdoptDog being called');
     petServices.getPet('dog')
     .then((dog) => {
       const originalDog = dog.first.value.name;
