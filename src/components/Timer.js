@@ -2,7 +2,7 @@ import React from 'react'
 
 class Timer extends React.Component {
   state = {
-    time: 10,
+    time: 6,
     timer: null,
     isOn: false,
   }
@@ -24,22 +24,27 @@ class Timer extends React.Component {
   }
 
   updateTimer = () => {
-    this.state.time > 0 ?
+    if(this.props.usersQueue.length > 0) {
+      this.state.time > 0 ?
     this.setState({
       time: (this.state.time - 1)
     }) : this.resetTimer();
+    } else {
+      this.stopTimer();
+    }
+    
   }
 
   stopTimer() {
-    this.clearInterval(this.state.timer);
+    clearInterval(this.state.timer);
     this.setState({
-      time: 10,
+      time: 6,
     })
   }
 
   resetTimer() {
     this.setState({
-      time: 10,
+      time: 6,
     })
   }
 
@@ -47,7 +52,7 @@ class Timer extends React.Component {
     this.setState({
       isOn: this.props.adoption
     })
-    if (this.state.adoption) {
+    if (this.state.isOn) {
       this.startTimer();
     }
   }
@@ -58,7 +63,7 @@ class Timer extends React.Component {
   }
 
   render() {
-    let timer = this.state.isOn ? <span>Next Turn in: 0:{this.state.time}</span> : '';
+    let timer = this.state.isOn ? <span>Next Turn in: 0:0{this.state.time}</span> : '';
     return (
       <div className='Timer'>
         {timer}

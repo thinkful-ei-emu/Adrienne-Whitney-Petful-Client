@@ -35,7 +35,9 @@ class AdoptionPage extends React.Component {
     this.setState({
       timer: timer,
       catTimer: catTimer,
-      dogTimer: dogTimer
+      dogTimer: dogTimer,
+      catTimer2: catTimer2,
+      dogTimer2: dogTimer2
     })
   };
 
