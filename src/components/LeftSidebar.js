@@ -1,4 +1,5 @@
 import React from 'react';
+import Timer from './Timer';
 import './styles/LeftSidebar.css';
 
 class LeftSidebar extends React.Component {
@@ -10,10 +11,12 @@ class LeftSidebar extends React.Component {
         <li key={index}>{user}</li>
       )
     }) : ''
+    const timer = this.props.adoption ? <Timer adoption={this.props.adoption}/> : ''
 
     return (
       <div className='LeftSidebar-container'>
         <h2>Queue</h2>
+        {timer}
         <ul>
           {users}
         </ul>

@@ -17,6 +17,7 @@ class AdoptionPage extends React.Component {
     this.startTimer();
     userService.postUser('YOU!');
     this.props.addUser();
+    this.props.handleTimerStart();
   }
 
   // Starts adoption timer

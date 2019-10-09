@@ -20,6 +20,7 @@ class App extends React.Component {
     timer: [],
     usersQueue: [],
     currentUser: [],
+    adoption: false,
   }
 
   componentDidMount() {
@@ -58,6 +59,11 @@ class App extends React.Component {
     })
   }
 
+  handleTimerStart = () => {
+    this.setState({
+      adoption: true,
+    })
+  }
 
   handleAdopt = (pet) => {
     if (pet === 'cat') {
@@ -106,7 +112,9 @@ class App extends React.Component {
       
       <Header />
       <main className="main-container">
-        <LeftSidebar usersQueue={this.state.usersQueue} />
+        <LeftSidebar 
+          usersQueue={this.state.usersQueue} 
+          adoption={this.state.adoption}/>
         <Route exact path='/' component={LandingPage} />
         <Route path='/adopt' render={({history}) => (
           <AdoptionPage
@@ -117,6 +125,7 @@ class App extends React.Component {
             cat={this.state.cat}
             dog={this.state.dog}
             addUser={this.addUser}
+            handleTimerStart={this.handleTimerStart}
             />
           )} 
         />
